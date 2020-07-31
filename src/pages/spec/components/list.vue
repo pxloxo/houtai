@@ -21,7 +21,9 @@
         </template>
       </el-table-column>
     </el-table>
+
     <!-- 分页 -->
+
     <el-pagination background layout="prev, pager, next" @current-change="cPage" :page-size="size" :total="total"></el-pagination>
   </div>
 </template>
@@ -51,11 +53,12 @@ export default {
     edit(id) {
       this.$emit("edit", id);
     },
-  //点击删除
+    //点击删除
     del(id) {
       requestSpecDelete({ id: id }).then((res) => {
         if (res.data.code == 200) {
           successAlert("删除成功");
+          
           this.requestList();
           this.requestTotal()
         } else {

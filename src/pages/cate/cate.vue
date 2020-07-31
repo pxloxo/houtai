@@ -27,12 +27,13 @@ export default {
     };
   },
   methods: {
+    //点击添加
     add() {
       this.info.show = true;
       this.info.title="分类添加"
       this.info.isAdd=true
     },
-    //点击了编辑
+    //点击编辑
     edit(id){
         this.info.show=true;
          this.info.title="分类编辑"

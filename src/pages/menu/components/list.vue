@@ -49,7 +49,7 @@ export default {
     ...mapActions({
       requestList: "menu/requestList",
     }),
-    //点击编辑按钮
+    //点击编辑
     edit(id) {
       this.$emit("edit", id);
     },

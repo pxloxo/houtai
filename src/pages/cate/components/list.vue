@@ -47,13 +47,12 @@ export default {
     ...mapActions({
       requestList: "cate/requestList",
     }),
-    //点击编辑按钮
+    //点击编辑
     edit(id) {
       this.$emit("edit", id);
     },
     //点击删除
     del(id) {
-        console.log(id)
       requestCateDelete({ id: id }).then((res) => {
         if (res.data.code == 200) {
           successAlert(res.data.msg);
@@ -63,6 +62,7 @@ export default {
         }
       });
     },
+   
   },
   mounted() {
     this.requestList();

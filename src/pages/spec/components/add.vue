@@ -46,6 +46,7 @@ export default {
           value: "",
         },
       ],
+
       //提交给后端的数据
       form: {
         specsname: "",
@@ -59,17 +60,18 @@ export default {
   },
   methods: {
     ...mapActions({
+      
       requestList: "spec/requestList",
       requestTotal: "spec/requestTotal",
     }),
 
-    //新增规格属性
+    //新增规格的属性
     addAttr() {
       this.attrArr.push({
         value: "",
       });
     },
-    //删除规格属性
+    //删除规格的属性
     delAttr(index) {
       this.attrArr.splice(index, 1);
     },
@@ -96,13 +98,15 @@ export default {
     },
     //添加
     add() {
-      if (this.attrArr.some((item) => item.value == "")) {
-        warningAlert("属性规格均不能为空");
-        return;
-      }
+  
 
       this.form.attrs = JSON.stringify(this.attrArr.map((item) => item.value));
       //发起添加请求
+      // 判断空值
+        if (this.form.specsname == "" || this.form.attrs == '[""]') {
+        warningAlert("不能空值,请输入");
+        return;
+      }
       requestSpecAdd(this.form).then((res) => {
         if (res.data.code == 200) {
           successAlert(res.data.msg);
@@ -113,7 +117,7 @@ export default {
           //重新获取角色列表的数据
           this.requestTotal();
           //重新获取总的数量
-          this.requestTotal();
+          this.requestList();
         } else {
           warningAlert(res.data.msg);
         }
@@ -121,7 +125,6 @@ export default {
     },
     //获取一条的数据
     getDetail(id) {
-      //ajax
       requestSpecDetail({ id: id }).then((res) => {
         this.form = res.data.list[0];
         this.attrArr = JSON.parse(res.data.list[0].attrs).map((item) => ({
@@ -135,7 +138,6 @@ export default {
         warningAlert("属性规格均不能为空");
         return;
       }
-
       this.form.attrs = JSON.stringify(this.attrArr.map((item) => item.value));
       requestSpecUpdate(this.form).then((res) => {
         if (res.data.code == 200) {
@@ -145,7 +147,7 @@ export default {
           this.requestList();
         } else {
           warningAlert(res.data.msg);
-        }
+        }x
       });
     },
   },

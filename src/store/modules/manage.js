@@ -10,7 +10,7 @@ const state={
     page:1
 }
 const mutations={
-    //修改list
+    //修改list的值
     changeList(state,arr){
         state.list=arr;
     },
@@ -24,7 +24,7 @@ const mutations={
     }
 }
 const actions={
-    //获取列表数据
+    //获取列表的数据
     requestList(context){
         const params={
             page:context.state.page,

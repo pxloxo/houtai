@@ -7,6 +7,7 @@ export const successAlert = (msg)=>{
         type: 'success'
     });
 }
+
 //警告弹框
 export const warningAlert = (msg)=>{
     vm.$message({
@@ -14,6 +15,7 @@ export const warningAlert = (msg)=>{
         type: 'warning'
     });
 }
+
 //错误弹框
 export const errorAlert = (msg)=>{
     vm.$message.error(msg);

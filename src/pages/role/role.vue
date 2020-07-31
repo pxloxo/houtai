@@ -1,10 +1,8 @@
 <template>
   <div>
     <el-button type="success" @click="add">添加</el-button>
-
     <!-- 添加弹框 -->
     <v-add :info="info" ref="add"></v-add>
-
     <!-- 列表 -->
     <v-list @edit="edit($event)"></v-list>
   </div>
@@ -24,10 +22,10 @@ export default {
         title: "添加角色",
         isAdd:true
       },
-    }
+    };
   },
   methods: {
-    //点击添加按钮
+    //点击添加
     add() {
       this.info.show = true;
       this.info.title = "添加角色";

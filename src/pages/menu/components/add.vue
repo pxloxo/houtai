@@ -77,6 +77,7 @@ export default {
         "/goods",
         "/banner",
         "/seckill",
+        "/member"
       ],
       form: {
         pid: 0,
@@ -110,8 +111,16 @@ export default {
         this.empty()
       }
     },
-    //点击添加按钮
+    //点击添加
     add() {
+       //判断是否有空值
+      if (
+        this.form.title == "" ||
+        (this.form.icon == "" && this.form.url == "")
+      ) {
+        warningAlert("不能有空值，请输入");
+        return;
+      } else{
       requestMenuAdd(this.form).then((res) => {
         if (res.data.code == 200) {
           successAlert(res.data.msg);
@@ -125,6 +134,7 @@ export default {
           warningAlert(res.data.msg);
         }
       });
+    }
     },
     //获取某一条的数据
     getDetail(id) {
@@ -133,7 +143,7 @@ export default {
         this.form.id = id;
       });
     },
-    //点击修改
+    //修改
     update() {
       requestMenuUpdate(this.form).then((res) => {
         if(res.data.code==200){

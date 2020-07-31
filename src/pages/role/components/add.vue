@@ -5,7 +5,9 @@
         <el-form-item label="角色名称" label-width="80px">
           <el-input v-model="form.rolename" autocomplete="off"></el-input>
         </el-form-item>
+
         <el-form-item label="角色权限" label-width="80px">
+          <!-- :default-checked-keys="[1,5]" 默认选中的数组 -->
           <el-tree
             :data="menuList"
             show-checkbox
@@ -91,13 +93,18 @@ export default {
     add() {
       //获取tree的key赋值给form.menus
       this.form.menus = JSON.stringify(this.$refs.tree.getCheckedKeys());
+      // 判断空值
+        if (this.form.rolename == "" || this.form.menus == "[]") {
+        warningAlert("不能空值,请输入");
+        return;
+      }
       //发起添加角色的请求
       requestRoleAdd(this.form).then((res) => {
         if (res.data.code == 200) {
           successAlert(res.data.list);
           //清空
           this.empty();
-          //弹框消失
+          //弹框的消失
           this.cancel();
           //重新获取角色列表的数据
           this.requestRoleList();
@@ -108,7 +115,6 @@ export default {
     },
     //获取一条的数据
     getDetail(id) {
-      //ajax
       requestRoleDetail({ id: id }).then((res) => {
         this.form = res.data.list;
         this.form.id = id;
@@ -117,7 +123,6 @@ export default {
     },
     //点击修改
     update() {
-      //获取tree的key赋值给form.menus
       this.form.menus = JSON.stringify(this.$refs.tree.getCheckedKeys());
       requestRoleUpdate(this.form).then((res) => {
         if (res.data.code == 200) {

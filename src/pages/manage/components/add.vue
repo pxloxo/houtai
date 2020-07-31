@@ -9,12 +9,14 @@
             <el-option v-for="item in roleList" :key="item.id" :label="item.rolename" :value="item.id"></el-option>
           </el-select>
         </el-form-item>
+
         <el-form-item label="用户名" label-width="80px">
           <el-input v-model="form.username"></el-input>
         </el-form-item>
         <el-form-item label="密码" label-width="80px">
           <el-input v-model="form.password" show-password></el-input>
         </el-form-item>
+
         <el-form-item label="状态" label-width="80px">
           <el-switch v-model="form.status" :active-value="1" :inactive-value="2"></el-switch>
         </el-form-item>
@@ -85,7 +87,15 @@ export default {
     },
     //添加
     add() {
-      
+       //判断是空值
+        if (
+        this.form.roleid == null ||
+        this.form.username == "" ||
+        this.form.password == ""
+      ) {
+        warningAlert("不能空值,请输入");
+        return;
+      }
       //发起添加请求
       requestManageAdd(this.form).then((res) => {
         if (res.data.code == 200) {
@@ -105,7 +115,6 @@ export default {
     },
     //获取一条的数据
     getDetail(id) {
-      //ajax
       requestManageDetail({ uid: id }).then((res) => {
         this.form = res.data.list;
         this.form.password=""
@@ -113,7 +122,6 @@ export default {
     },
     //点击修改
     update() {
-     
       requestManageUpdate(this.form).then((res) => {
         if (res.data.code == 200) {
           successAlert("修改成功");

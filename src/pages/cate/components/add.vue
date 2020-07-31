@@ -65,6 +65,7 @@ export default {
     ...mapActions({
       requestList: "cate/requestList",
     }),
+
     //修改了图片
     changeImg(e) {
       //上传的文件不能超过2M
@@ -85,10 +86,10 @@ export default {
       this.imageUrl = URL.createObjectURL(file);
       this.form.img = file;
     },
+
     //自己的上传文件
     changeImg2(e) {
       var file = e.target.files[0];
-     //上传的文件不能超过2M
       if (file.size > 2 * 1024 * 1024) {
         warningAlert("上传的图片不能超过2M");
         return;
@@ -100,11 +101,13 @@ export default {
         warningAlert("上传文件必须是图片");
         return;
       }
+
       //生成一个URL地址，赋值给imageUrl,展示出来
       this.imageUrl = URL.createObjectURL(file);
       this.form.img = file;
     },
-    //重置内容
+
+    //重置数据
     empty() {
       this.form = {
         pid: 0,
@@ -121,8 +124,20 @@ export default {
         this.empty();
       }
     },
-    //点击了添加按钮
+    //点击添加按钮
     add() {
+      // 判断空值
+          if (this.form.pid == 0 && this.form.catename == "") {
+        warningAlert("不能空值,请输入");
+        return;
+      }
+      //当为二级分类时图片不能为空
+      if (this.form.pid != 0) {
+        if (this.form.catename == "" || this.form.img == null) {
+          warningAlert("不能空值,请输入");
+          return;
+        }
+      }
       requestCateAdd(this.form).then((res) => {
         if (res.data.code == 200) {
           successAlert(res.data.msg);
@@ -145,7 +160,7 @@ export default {
         this.imageUrl = this.$imgPre + res.data.list.img;
       });
     },
-    //修改数据
+    //修改
     update() {
       requestCateUpdate(this.form).then((res) => {
         if (res.data.code == 200) {

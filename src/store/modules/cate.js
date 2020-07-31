@@ -1,18 +1,18 @@
 import {requestCateList} from "../../util/request"
 const state={
-    //列表数据
+    //列表的数据
     list:[]
 }
 const mutations={
-    //修改list
-    changeList(state,arr){
+    //修改list的值
+    changeCateList(state,arr){
         state.list=arr;
     }
 }
 const actions={
     requestList(context){
         requestCateList({istree:true}).then(res=>{
-            context.commit("changeList",res.data.list)
+            context.commit("changeCateList",res.data.list)
         })
     }
 }

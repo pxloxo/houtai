@@ -17,7 +17,7 @@ export default {
   },
   data() {
     return {
-      //传递给子组件的值
+      //传递给子组件的信息
       info: {
         //弹框的出现状态
         show: false,
@@ -26,8 +26,8 @@ export default {
       },
     };
   },
-  //点击添加
   methods: {
+    //点击添加
     add() {
       this.info.show = true;
       this.info.title="菜单添加"

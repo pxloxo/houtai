@@ -1,19 +1,19 @@
-import {requestMenuList} from "../../util/request"
+import{requestMemberList} from "../../util/request"
 const state={
-    //列表的数据
+    //列表数据
     list:[]
 }
 const mutations={
-    //修改list的值
-    changeMenuList(state,arr){
+    //修改list
+    changeMemberList(state,arr){
         state.list=arr;
     }
 }
 const actions={
     requestList(context){
         
-        requestMenuList({istree:true}).then(res=>{
-            context.commit("changeMenuList",res.data.list)
+        requestMemberList().then(res=>{
+            context.commit("changeMemberList",res.data.list)
         })
     }
 }

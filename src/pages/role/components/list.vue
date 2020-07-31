@@ -42,7 +42,7 @@ export default {
       edit(id){
           this.$emit("edit",id)
       },
-   //点击删除
+      //点击删除
       del(id){
           requestRoleDelete({id:id}).then(res=>{
               if(res.data.code==200){

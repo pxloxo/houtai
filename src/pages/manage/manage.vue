@@ -25,7 +25,7 @@ export default {
     };
   },
   methods: {
-    //点击添加按钮
+    //点击添加
     add() {
       this.info.show = true;
       this.info.title = "添加管理员";
