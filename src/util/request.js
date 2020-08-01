@@ -341,3 +341,93 @@ export const requestMemberUpdate = (params) => {
         data: qs.stringify(params)
     })
 }
+// *********************轮播图
+//轮播图添加
+export const requestBannerAdd = (params) => {
+    let form = new FormData();
+    for (var i in params) {
+        form.append(i, params[i])
+    }
+    return axios({
+        url: baseUrl + "/api/banneradd",
+        method: "post",
+        data: form
+    })
+}
+//轮播图列表
+export const requestBannerList = (params) => {
+    return axios({
+        url: baseUrl + "/api/bannerlist",
+        method: "get",
+        params
+    })
+}
+//轮播图某一个条数据
+export const requestBannerDetail = params => {
+    return axios({
+        url: baseUrl + "/api/bannerinfo",
+        method: "get",
+        params
+    })
+}
+//轮播图修改
+export const requestBannerUpdate = (params) => {
+    let form = new FormData();
+    for (var i in params) {
+        form.append(i, params[i])
+    }
+    return axios({
+        url: baseUrl + "/api/banneredit",
+        method: "post",
+        data: form
+    })
+}
+
+//删除轮播图
+export const requestBannerDelete = (params) => {
+    return axios({
+        url: baseUrl + "/api/bannerdelete",
+        method: "post",
+        data: params
+    })
+}
+//************秒杀活动
+//添加活动
+export const requesSeckillAdd = (params) => {
+    return axios({
+        url: baseUrl + "/api/seckadd",
+        method: "post",
+        data: params
+    })
+}
+//活动列表
+export const requestSeckillList = () => {
+    return axios({
+        url: baseUrl + "/api/secklist",
+        method: "get",
+    })
+}
+//单条活动
+export const requestSeckillDetail = (params) => {
+    return axios({
+        url: baseUrl + "/api/seckinfo",
+        method: "get",
+        params
+    })
+}
+//修改活动
+export const requestSeckillUpdate = (params) => {
+    return axios({
+        url: baseUrl + "/api/seckedit",
+        method: "post",
+        data: params
+    })
+}
+//删除活动
+export const requestSeckillDelete = (params) => {
+    return axios({
+        url: baseUrl + "/api/seckdelete",
+        method: "post",
+        data: params
+    })
+}

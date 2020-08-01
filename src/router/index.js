@@ -3,6 +3,10 @@ import Router from 'vue-router'
 import store from "../store/index"
 Vue.use(Router)
 
+const originalPush = Router.prototype.push;
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err);
+}
 // 路由独享卫士
 function havePower(url){
   return store.state.user.menus_url.some(i=>i==url)
